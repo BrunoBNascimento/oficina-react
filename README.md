@@ -12,3 +12,12 @@ Projeto usado como boilerplate ou pontapé inicial para a oficina ministrada no 
 - [x] Flux architeture
 - [x] Store
 - [x] Connect e react-redux
+
+
+**Para Rodar o projeto:**
+
+
+yarn install && yarn start ou
+
+
+npm install && npm start
