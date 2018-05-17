@@ -6,6 +6,8 @@ Projeto usado como boilerplate ou pontapé inicial para a oficina ministrada no 
 - [x] Componentes
 - [x] Ciclo de vida
 - [x] Estado da aplicação
+
+
 **Redux:**
 - [x] Flux architeture
 - [x] Store
