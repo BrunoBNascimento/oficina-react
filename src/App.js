@@ -2,29 +2,31 @@ import React, { Component } from 'react';
 import logo from './img/if.png';
 import './App.css';
 import avatar from './img/avatar.png'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { sendFormAction } from './actions/timeline-actions'
 
 class App extends Component {
   constructor(){
     super()
-    this.state = {
-      posts: []
-    }
   }
 
-  changeHandler = event => {
+  submitHandler = event => {
     event.preventDefault()
-
+    const { submitHandler } = this.props
+    
     const formValues = {
       title: event.target.title.value,
       post: event.target.post.value
     }
 
-    const newState = [ ...this.state.posts, formValues ]
-    
-    this.setState({ posts: newState })
+    return submitHandler(formValues)
   }
 
   render() {
+    const { posts, sendFormAction } = this.props
+    console.log(this.props)
+
     return (
       <div>
         <div className="header">
@@ -35,12 +37,12 @@ class App extends Component {
             <input onChange="" name="search" placeholder="Buscar posts..." />
           </div>
         </div>
-        <form id="body" onSubmit={this.changeHandler}>
+        <form id="body" onSubmit={this.submitHandler}>
           <div className="make-post">
             <h1>Use esta area para fazer o seu post</h1>
             <div>
               <label for="title">Titulo</label>
-              <input name="title" id="title" />
+              <input name="title" id="title"/>
             </div>
             <div>
               <label for="post">Postagem</label>
@@ -49,7 +51,7 @@ class App extends Component {
             <button className="primary">Postar</button>
           </div>
           {
-            this.state.posts.map((post, idx) => {
+            posts && posts.map((post, idx) => {
               return (
                 <div className="card" key={`post_${idx}`}>
                   <div className="card-header">
@@ -71,4 +73,12 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapActionsToProps = dispatch => ({
+  submitHandler: formValues => dispatch(sendFormAction(formValues))
+})
+
+const mapStateToProps = state => ({
+  posts: state.posts
+})
+
+export default connect(mapStateToProps, mapActionsToProps)(App)
