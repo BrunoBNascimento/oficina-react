@@ -8,10 +8,6 @@ import { Provider } from 'react-redux'
 import { timeline } from './reducers/timeline-reducer'
 import thunkMiddleware from "redux-thunk"
 
-/*const reducers = combineReducers({
-  timeline
-})*/
-
 const thunk = applyMiddleware(thunkMiddleware)
 const store = createStore(timeline, thunk)
 
